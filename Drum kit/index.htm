@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Drum kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background: url("./img/background-drum.jpg") no-repeat;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 80%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .key {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ffff;
+        border: 5px solid white;
+        background: rgba(0, 0, 0, 0.3);
+        transition: transform 0.1s ease-in-out;
+      }
+
+      .key > div {
+        font-size: 50px;
+      }
+
+      .key > span {
+        font-size: 20px;
+      }
+
+      .active {
+        transform: scale(1.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div data-key="81" class="key">
+        <div>Q</div>
+        <span>ride</span>
+      </div>
+      <div data-key="87" class="key">
+        <div>W</div>
+        <span>clap</span>
+      </div>
+      <div data-key="69" class="key">
+        <div>E</div>
+        <span>hithat</span>
+      </div>
+      <div data-key="82" class="key">
+        <div>R</div>
+        <span>kick</span>
+      </div>
+      <div data-key="84" class="key">
+        <div>T</div>
+        <span>openhat</span>
+      </div>
+    </div>
+
+    <audio data-key="81" src="./sound/ride.wav"></audio>
+    <audio data-key="87" src="./sound/clap.wav"></audio>
+    <audio data-key="69" src="./sound/hihat.wav"></audio>
+    <audio data-key="82" src="./sound/kick.wav"></audio>
+    <audio data-key="84" src="./sound/openhat.wav"></audio>
+    <script>
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+
+      let keyPresed = false;
+
+      function handleKeyDown(e) {
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"`);
+        if (!key || keyPresed) return;
+        keyPresed = true;
+        playSound(e.keyCode);
+        addActiveClass(key);
+      }
+
+      function handleKeyUp(e) {
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"`);
+        key.classList.remove("active");
+        keyPresed = false;
+      }
+
+      function playSound(keyCode) {
+        const sound = document.querySelector(`audio[data-key="${keyCode}"]`);
+        sound.currentTime = 0;
+        sound.play();
+      }
+
+      function addActiveClass(key) {
+        key.classList.add("active");
+      }
+    </script>
+  </body>
+</html>
