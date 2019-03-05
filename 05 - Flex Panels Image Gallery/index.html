@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Image Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .panels {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      color: #ffff;
+      font-family: 'Amatic SC';
+    }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      font-size: 30px;
+      transition:  flex 0.5s ease,
+      font-size 0.3s ;
+    }
+
+    .panel--1 {
+     background: url('./img/sunset.jpg') center/cover ;
+    }
+    .panel--2 {
+     background: url('./img/tree.jpg') center/cover ;
+    }
+    .panel--3 {
+     background: url('./img/Acropolis.jpg') center/cover ;
+    }
+    .panel--4 {
+     background: url('./img/stonehedge.jpg') center/cover ;
+    }
+    .panel--5 {
+     background: url('./img/water.jpg') center/cover ;
+    }
+
+    .panel > :first-child {
+      transform: translateY(-800%);
+      transition: transform 0.5s;
+    }
+
+    .panel > :last-child{
+      transform: translateY(800%);
+      transition: transform  0.5s;
+    }
+
+    .is-active > :first-child {
+      transform: translateY(0%);
+    }
+
+    .is-active > :last-child {
+      transform: translateY(0%);
+    }
+
+    .is-open {
+      flex: 5;
+      font-size: 60px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="panels">
+    <div class="panel panel--1">
+      <p class="text--top">Venice</p>
+      <p class="text--center">Sunset</p>
+      <p class="text--bottom">Italy</p>
+    </div>
+    <div class="panel panel--2">
+      <p class="text--top">Valencia</p>
+      <p class="text--center">Tree</p>
+      <p class="text--bottom">Spain</p>
+    </div>
+    <div class="panel panel--3">
+      <p class="text--top">Athens</p>
+      <p class="text--center">Acropolis</p>
+      <p class="text--bottom">Greece</p>
+    </div>
+    <div class="panel panel--4">
+      <p class="text--top">Stonehedge</p>
+      <p class="text--center">Stones</p>
+      <p class="text--bottom">England</p>
+    </div>
+    <div class="panel panel--5">
+      <p class="text--top">Mauritius</p>
+      <p class="text--center">Water</p>
+      <p class="text--bottom">Indian Ocean</p>
+    </div>
+  </div>
+  <script>
+    const panels = document.querySelectorAll('.panel');
+    panels.forEach(panel => panel.addEventListener("click",openPanel));
+    panels.forEach(panel => panel.addEventListener("transitionend",showText));
+
+    function openPanel(e){
+      this.classList.toggle("is-open");
+       closePanels(this);
+    }
+
+    function showText(e){
+      console.log(e);
+     
+      if(e.propertyName.includes("flex")) {
+        this.classList.toggle("is-active")
+      }
+    }
+
+    function closePanels(openPanel) {
+      panels.forEach(panel => {if(openPanel !== panel){
+        panel.classList.remove("is-open");
+      }});
+    }
+  </script>
+</body>
+</html>
