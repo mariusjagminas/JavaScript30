@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ajax Type Ahead</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .hl {
+        background: yellow;
+      }
+
+      body {
+        background: #172d40;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      input[type="text"] {
+        font-size: 30px;
+        border: 10px solid grey;
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .place {
+        margin-left: 70px;
+        text-transform: none;
+      }
+
+      li {
+        background: white;
+        width: 230px;
+        font-size: 12px;
+        margin: 0;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        text-transform: capitalize;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+  
+      }
+
+      
+      li:nth-child(even) {
+        transform: perspective(100px) rotateX(4deg) ;
+        background: linear-gradient(to bottom, #ffffff 0%, #efefef 100%);
+       
+      }
+      li:nth-child(odd) {
+        transform: perspective(100px) rotateX(-4deg) ;
+        background: linear-gradient(to top, #ffffff 0%, #efefef 100%);
+      
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" name="search" placeholder="City or State" />
+      <ul class="cities-list">
+        <li>
+          <p class="place">Seach for a City</p>
+          <p class="population"></p>
+        </li>
+        <li>
+          <p class="place">or a State</p>
+          <p class="population"></p>
+        </li>
+    </div>
+    <script>
+      const endpoint =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+      const places = [];
+      fetch(endpoint)
+        .then(data => data.json())
+        .then(data => places.push(...data));
+
+      const citiesList = document.querySelector(".cities-list");
+      const searchField = document.querySelector('input[name="search"]');
+     searchField.addEventListener("keyup", handleInput);
+      
+
+      function handleInput() {
+        findMatchedPlaces(this.value, places);
+      }
+
+      function findMatchedPlaces(value, places) {
+        const regex = new RegExp(value, "gi");
+        const matchedPlaces = places.filter(
+          place => place.city.match(regex) || place.state.match(regex)
+        );
+        displayMatchedPlaces(matchedPlaces, value, regex);
+      }
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      function displayMatchedPlaces(matchedPlaces, value, regex) {
+        const html = matchedPlaces
+          .map(place => {
+            const city = place.city.replace(
+              regex,
+              `<span class="hl">${value}</span>`
+            );
+            const state = place.state.replace(
+              regex,
+              `<span class="hl">${value}</span>`
+            );
+            return `<li>
+                    <p >${city},${state}</p>
+                    <p >${numberWithCommas(
+                      place.population
+                    )}</p>
+                  </li>`;
+          })
+          .join(" ");
+
+        console.log(html);
+        citiesList.innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
