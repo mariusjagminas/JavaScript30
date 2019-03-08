@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Canvas Tricks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100vh;
+        overflow: hidden;
+      }
+      h1 {
+        position: absolute;
+        z-index: -10;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        margin-left: -200px;
+        margin-top: -60px;
+        font-size: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Draw on a canvas
+      <br />
+      using a mouse
+    </h1>
+    <canvas id="canvas">
+      this browser does not support a canvas
+    </canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      context.lineCap = "round";
+      context.strokeStyle = "red";
+      context.globalCompositeOperation = "multiply";
+
+      let lastX,
+        lastY,
+        hue = 0,
+        drawLine = false,
+        direction = true;
+
+      canvas.addEventListener("mousemove", e => {
+        draw(e);
+      });
+      canvas.addEventListener("mousedown", e => {
+        drawLine = true;
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+      });
+      canvas.addEventListener("mouseup", () => (drawLine = false));
+      canvas.addEventListener("mouseout", () => (drawLine = false));
+
+      function draw(e) {
+        if (!drawLine) return;
+        context.beginPath();
+        context.moveTo(lastX, lastY);
+        context.lineTo(e.offsetX, e.offsetY);
+        context.stroke();
+
+        if (context.lineWidth >= 100 || context.lineWidth <= 1)
+          direction = !direction;
+        direction ? context.lineWidth++ : context.lineWidth--;
+        context.strokeStyle = `hsl(${hue}, 100% ,50%)`;
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+        hue < 359 ? hue++ : (hue = 0);
+      }
+    </script>
+  </body>
+</html>
