@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Dev Triks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h1>Hello</h1>
+    <script>
+      const dogs = [{ name: "Snickers", age: 2 }, { name: "hugo", age: 8 }];
+      const h1 = document.querySelector("h1");
+
+      h1.addEventListener("click", () => (h1.style.color = "red"));
+
+      // Regular
+
+      console.log("helo");
+
+      // Interpolated
+
+      console.log("hello my name is %s", "Marius");
+
+      // Styled
+
+      console.log("%c Hello World", "font-size: 50px; color: red");
+
+      // warning!
+
+      console.warn("This is Warning");
+
+      // Error :|
+
+      console.error("Error");
+
+      // Info
+
+      console.info("hello", "skk");
+
+      // Testing
+
+      console.assert(2 == 1, "No it's not");
+
+      // clearing
+
+      console.clear();
+
+      // Viewing DOM Elements
+
+      console.log(h1);
+      console.dir(h1);
+
+      // Grouping together
+      console.groupCollapsed("dogs");
+      console.log("Dog name is %s", dogs[0].name);
+      console.log("Dog name is %s", dogs[1].name);
+      console.groupEnd();
+
+      console.log("new Log");
+
+      // counting
+
+      console.count("Name");
+      console.count("Name");
+      console.count("Name");
+      console.count("Name");
+      console.count("Name");
+      console.count("Name");
+      console.count("Name");
+      console.count("Surname");
+      console.count("Surname");
+      console.count("Surname");
+      console.count("Surname");
+      // timing
+      console.time("Fetch time");
+      fetch("https://api.github.com/users/mariusjagminas")
+        .then(data => data.json())
+        .then(data => {
+          console.timeEnd("Fetch time");
+          console.dir(data);
+        });
+
+        console.table(dogs);
+    </script>
+  </body>
+</html>
