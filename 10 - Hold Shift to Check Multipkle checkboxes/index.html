@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Select multiple checkboxes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background: #6a05a1;
+      }
+
+      .container {
+        max-width: 300px;
+        margin: 50px auto;
+        background: #f1f100;
+      }
+
+      .item {
+        border-bottom: 1px solid #dbdb09;
+        display: flex;
+        align-items: center;
+      }
+
+      label {
+        border-left: 1px solid #dbdb09;
+        padding: 10px;
+      }
+
+      input[type="checkbox"] {
+        margin: 10px;
+      }
+
+      input[type="checkbox"]:checked + label {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">
+        <input type="checkbox" />
+        <label>This is an inbox layout</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Check one Item</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Hold down your Shift key</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Check a lower item</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Everything inbetween should also be set to checked</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Try to do this without any libraries</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Just plain JavaScript</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>Good Luck!!!</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <label>It's working HOOO !!!</label>
+      </div>
+    </div>
+    <script>
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox =>
+        checkbox.addEventListener("click", handleChange)
+      );
+      let lastChecked,
+        inbetween = false;
+
+      function handleChange(e) {
+        if (e.shiftKey && lastChecked.checked) {
+          checkboxes.forEach(checkbox => {
+            if (checkbox === lastChecked || checkbox === this)
+              inbetween = !inbetween;
+
+            if (inbetween) {
+              checkbox.checked = true;
+            }
+          });
+        }
+        lastChecked = this;
+      }
+    </script>
+  </body>
+</html>
