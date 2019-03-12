@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+    <style>
+      :root {
+        --color: #172d40;
+      }
+      body {
+        background: var(--color);
+        color: #fff;
+        text-align: center;
+      }
+      h1 {
+        margin-top: 70px;
+      }
+      p {
+        font-size: 80px;
+      }
+    </style>
+    <title>Key Sequence Detection</title>
+  </head>
+  <body>
+    <h1>Press keys in this order:</h1>
+    <p>S G L</p>
+    <script>
+      document.addEventListener("keyup", matchKeysSequance);
+      const root = document.querySelector(":root");
+
+      // My solution
+
+      // let positionInArray = 0;
+      // const keyCodes = [83, 71, 76];
+
+      // function matchKeysSequance(e) {
+      //   keyCodes[positionInArray] === e.keyCode
+      //     ? positionInArray++
+      //     : (positionInArray = e.keyCode === keyCodes[0] ? 1 : 0);
+      //   if (positionInArray === keyCodes.length) {
+      //     animateBackground();
+      //     positionInArray = 0;
+      //   }
+      // }
+
+      // WesBos style solution
+
+      const code = "sgl";
+      let presedKeys = [];
+
+      function matchKeysSequance(e) {
+        presedKeys.push(e.key);
+        presedKeys.splice(0, presedKeys.length - code.length);
+        if (presedKeys.join("") === code) animateBackground();
+      }
+
+      let isRed = false;
+      function animateBackground() {
+        cornify_add();
+        root.style.setProperty("--color", isRed ? "blue" : "red");
+        isRed = !isRed;
+      }
+    </script>
+  </body>
+</html>
