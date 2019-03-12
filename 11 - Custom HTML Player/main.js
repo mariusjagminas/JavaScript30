@@ -8,15 +8,21 @@ const rangeSliders = player.querySelectorAll('input[type="range"]');
 const skipBtns = player.querySelectorAll("button[data-skip]");
 const fullScreenBtn = player.querySelector(".full-screen");
 
-//--- Event listeners----//
+//--- Event listeners ----//
+
+// Controls panel //
+player.addEventListener("mousemove", showControlsOnFullScr);
 
 // Progress Bar //
 let isMouseDown = false;
-progressBar.addEventListener('click', moveProgressBar);
-progressBar.addEventListener('mousemove', (e) => isMouseDown && moveProgressBar(e));
-progressBar.addEventListener('mousedown',()=> isMouseDown = true );
-window.addEventListener('mouseup', ()=> isMouseDown = false);
-video.addEventListener('timeupdate', updateProgresBarLenght );
+progressBar.addEventListener("click", moveProgressBar);
+progressBar.addEventListener(
+  "mousemove",
+  e => isMouseDown && moveProgressBar(e)
+);
+progressBar.addEventListener("mousedown", () => (isMouseDown = true));
+window.addEventListener("mouseup", () => (isMouseDown = false));
+video.addEventListener("timeupdate", updateProgresBarLenght);
 
 // Play button and players screen
 video.addEventListener("click", playPauseVideo);
@@ -32,20 +38,30 @@ rangeSliders.forEach(slider =>
 // Skip buttons //
 skipBtns.forEach(btn => btn.addEventListener("click", skip));
 
-// Full screen button and window // 
+// Fullscreen button  //
 fullScreenBtn.addEventListener("click", toggleFullScreen);
+
+// Fullscreen window
 document.addEventListener("fullscreenchange", handleFullScreenChange);
- 
 
-//------ Functions --------// 
+//------ Functions --------//
 
-function updateProgresBarLenght(){
-  const progressBarLenght = (this.currentTime / this.duration) * 100;
-  progressBarFill.style.width =`${progressBarLenght}%`;
+function showControlsOnFullScr() {
+  if (!panel.classList.contains("show-panel") && isFullScreen) {
+    panel.classList.add("show-panel");
+    setTimeout(() => {
+      panel.classList.remove("show-panel");
+    }, 2000);
+  }
 }
 
-function moveProgressBar(e){
-  const positionOnX = (e.offsetX/progressBar.offsetWidth) * video.duration;
+function updateProgresBarLenght() {
+  const progressBarLenght = (this.currentTime / this.duration) * 100;
+  progressBarFill.style.width = `${progressBarLenght}%`;
+}
+
+function moveProgressBar(e) {
+  const positionOnX = (e.offsetX / progressBar.offsetWidth) * video.duration;
   video.currentTime = positionOnX;
 }
 
@@ -69,12 +85,54 @@ function skip() {
 }
 
 function toggleFullScreen() {
-  isFullScreen ? document.exitFullscreen() : player.requestFullscreen();
+  isFullScreen ? closeFullscreen() : openFullscreen(player);
 }
 
 function handleFullScreenChange() {
   isFullScreen = document.fullscreenElement ? true : false;
+  toggleFullScreenButton();
+  togglePlayerClass();
+}
+
+function toggleFullScreenButton() {
   fullScreenBtn.firstChild.classList = isFullScreen
     ? "fas fa-compress"
     : "fas fa-expand";
+}
+
+function togglePlayerClass() {
+  player.classList = isFullScreen ? "player" : "player player__hover";
+}
+
+// Cross browser support for Fullscreen API for most browsers
+// Not working properly on IE and Edge
+
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+    /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    /* Firefox */
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    /* Chrome, Safari and Opera */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    /* IE/Edge */
+    document.msExitFullscreen();
+  }
 }

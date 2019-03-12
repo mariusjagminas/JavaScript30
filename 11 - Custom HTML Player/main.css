@@ -1,11 +1,16 @@
-body {
-  background: rgb(58, 19, 230);
-}
-
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+body {
+  background: rgb(58, 19, 230);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 button {
@@ -25,11 +30,15 @@ i {
   position: relative;
   overflow: hidden;
   height: auto;
-  border: 3px solid black;
+  -webkit-box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.74);
+  -moz-box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.74);
+  box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.74);
 }
 
 .video {
   width: 100%;
+  height: auto;
+  display: block;
 }
 
 .panel {
@@ -41,15 +50,18 @@ i {
   height: 50px;
   transform: translateY(48px);
   transition: 0.5s ease;
-
 }
 
-.player:hover .panel {
+.panel:hover {
   transform: translateY(0px);
 }
 
-.is-hidden {
-  transform: translateY(45px);
+.player__hover:hover .panel {
+  transform: translateY(0px);
+}
+
+.show-panel {
+  transform: translateY(0px);
 }
 
 .progress-bar {
