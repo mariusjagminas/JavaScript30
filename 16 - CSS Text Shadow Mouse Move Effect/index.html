@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Shadow Effect on Mouse Move</title>
+    <style>
+      .hero {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 60px;
+        text-shadow: 30px 10px 1px blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>📀Shadow Effects 📀</h1>
+    </div>
+    <script>
+      const hero = document.querySelector(".hero");
+      const text = hero.querySelector("h1");
+      const distance = 50;
+
+      hero.addEventListener("mousemove", moveShadow);
+
+      function moveShadow(e) {
+        const { offsetWidth: width, offsetHeight: height } = hero;
+        let { offsetX: x, offsetY: y } = e;
+
+        if (e.target !== this) {
+          x = x + e.target.offsetLeft;
+          y = y + e.target.offsetTop;
+        }
+
+        const distanceX = Math.round((x / width) * distance - distance / 2);
+        const distanceY = Math.round((y / height) * distance - distance / 2);
+
+        text.style.textShadow = `${distanceX}px ${distanceY}px 0px blue,
+         ${distanceY}px ${distanceX}px 0px red`;
+      }
+    </script>
+  </body>
+</html>
