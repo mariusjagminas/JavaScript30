@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>CSS Variables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        --bg-color: #172d40;
+        --size: 50%;
+        --turn: 0deg;
+        background: var(--bg-color);
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        color: #fffefe;
+      }
+
+      .controls {
+        margin: 20px 0;
+        display: flex;
+        width: 70%;
+        justify-content: space-between;
+      }
+
+      .controls__input {
+        display: flex;
+        align-items: center;
+      }
+
+      label {
+        color: #fffefe;
+        font-size: 20px;
+        padding: 0 10px;
+      }
+
+      .object-container {
+        background: var(--bg-color);
+        width: 70%;
+        height: 400px;
+        max-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+      }
+
+      .img-wrapper {
+        width: var(--size);
+        border: 5px solid #fffefe;
+        transform: rotateY(var(--turn));
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      .arrow-back {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        color: #ffc600;
+        font-size: 70px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow-back:hover {
+        transform: translateX(-10px);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../index.html" class="arrow-back">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <div class="container">
+      <h1>Upadate CSS variables with JS</h1>
+      <div class="controls">
+        <div class="controls__input">
+          <label for="size">Resize</label>
+          <input
+            type="range"
+            name="--size"
+            max="50"
+            value="100"
+            data-suffix="%"
+          />
+        </div>
+        <div class="controls__input">
+          <label for="turn">Turn</label>
+          <input
+            type="range"
+            name="--turn"
+            value="0"
+            min="-180"
+            max="180"
+            data-suffix="deg"
+          />
+        </div>
+        <div class="controls__input">
+          <label for="background">Change Background</label>
+          <input
+            id="background"
+            type="color"
+            name="--bg-color"
+            value="#172D40"
+            data-suffix=""
+          />
+        </div>
+      </div>
+      <div class="object-container">
+        <div class="img-wrapper">
+          <img src="city.jpg" alt="image of city" />
+        </div>
+      </div>
+    </div>
+    <script>
+      const inputs = document.querySelectorAll(".controls__input input");
+      const body = document.querySelector("body");
+
+      inputs.forEach(input => input.addEventListener("change", handleInput));
+      inputs.forEach(input => input.addEventListener("mousemove", handleInput));
+
+      function handleInput() {
+        body.style.setProperty(this.name, this.value + this.dataset.suffix);
+      }
+    </script>
+  </body>
+</html>

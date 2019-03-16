@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
     <title>The Clock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
@@ -15,6 +21,12 @@
         align-items: center;
       }
 
+      p {
+        color: #fff;
+        font-size: 2em;
+        position: absolute;
+      }
+
       .clock {
         width: 250px;
         height: 250px;
@@ -23,6 +35,24 @@
         position: relative;
         opacity: 0;
         transition: opacity 400ms;
+        -webkit-box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.3);
+        background: rgb(124, 22, 197);
+      }
+
+      .cover {
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 10px;
+        position: absolute;
+        z-index: 3;
+        top: 120px;
+        left: 117px;
+        -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.45);
+        -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.45);
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.45);
       }
 
       .hand {
@@ -31,15 +61,20 @@
         top: 50%;
         left: 50%;
         transform-origin: 0%;
+        border-radius: 7px;
+        -webkit-box-shadow: 5px 7px 14px 0px rgba(0, 0, 0, 0.48);
+        -moz-box-shadow: 5px 7px 14px 0px rgba(0, 0, 0, 0.48);
+        box-shadow: 5px 7px 14px 0px rgba(0, 0, 0, 0.48);
+        transition: 0.1s cubic-bezier(0.31, -0.51, 0.74, 0.05);
       }
 
       .hand__hours {
-        width: 30%;
+        width: 35%;
         height: 6px;
       }
 
       .hand__minutes {
-        width: 46%;
+        width: 43%;
         height: 6px;
       }
 
@@ -53,10 +88,28 @@
       .is-visible {
         opacity: 1;
       }
+
+      .arrow-back {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        color: #ffc600;
+        font-size: 70px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow-back:hover {
+        transform: translateX(-10px);
+      }
     </style>
   </head>
   <body>
+    <a href="../index.html" class="arrow-back">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <p>Loading ...</p>
     <div class="clock">
+      <div class="cover"></div>
       <div class="hand hand__minutes"></div>
       <div class="hand hand__hours"></div>
       <div class="hand hand__seconds"></div>
@@ -69,7 +122,7 @@
       const handHours = document.querySelector(".hand__hours");
 
       setInterval(countTime, 1000);
-      setTimeout(showClock, 1000);
+      setTimeout(showClock, 1150);
 
       function countTime() {
         const time = new Date();
