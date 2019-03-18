@@ -12,6 +12,9 @@
     <title>CSS Variables</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
         --bg-color: #172d40;
         --size: 50%;
@@ -29,18 +32,26 @@
 
       h1 {
         color: #fffefe;
+        text-align: center;
+        margin-top: 100px;
       }
 
       .controls {
-        margin: 20px 0;
+        margin: 20px 0px;
         display: flex;
+        flex-wrap: wrap;
         width: 70%;
-        justify-content: space-between;
+        justify-content: space-evenly;
       }
 
       .controls__input {
         display: flex;
         align-items: center;
+        padding: 15px 0;
+      }
+
+      .controls__input:nth-child(3) {
+        display: none;
       }
 
       label {
@@ -51,9 +62,8 @@
 
       .object-container {
         background: var(--bg-color);
-        width: 70%;
-        height: 400px;
-        max-height: 400px;
+        width: 100%;
+        min-height: 200px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -71,7 +81,23 @@
         height: auto;
       }
 
-      .arrow-back {
+      @media (min-width: 500px) {
+        .object-container {
+          min-height: 500px;
+        }
+      }
+
+      @media (min-width: 1300px) {
+        .object-container {
+          width: 80%;
+          min-height: 400px;
+        }
+        .controls__input:nth-child(3) {
+          display: initial;
+        }
+      }
+
+      .arrow {
         position: fixed;
         top: 20px;
         right: 30px;
@@ -80,13 +106,13 @@
         transition: 0.5s ease-in-out;
       }
 
-      .arrow-back:hover {
+      .arrow:hover {
         transform: translateX(-10px);
       }
     </style>
   </head>
   <body>
-    <a href="../index.html" class="arrow-back">
+    <a href="../index.html" class="arrow">
       <i class="fas fa-arrow-circle-left"></i>
     </a>
     <div class="container">

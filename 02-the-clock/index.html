@@ -21,20 +21,12 @@
         align-items: center;
       }
 
-      p {
-        color: #fff;
-        font-size: 2em;
-        position: absolute;
-      }
-
       .clock {
         width: 250px;
         height: 250px;
         border: 10px solid white;
         border-radius: 300px;
         position: relative;
-        opacity: 0;
-        transition: opacity 400ms;
         -webkit-box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.3);
         -moz-box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.3);
         box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.3);
@@ -85,11 +77,7 @@
         transform: translateY(3px);
       }
 
-      .is-visible {
-        opacity: 1;
-      }
-
-      .arrow-back {
+      .arrow {
         position: fixed;
         top: 20px;
         right: 30px;
@@ -98,16 +86,15 @@
         transition: 0.5s ease-in-out;
       }
 
-      .arrow-back:hover {
+      .arrow:hover {
         transform: translateX(-10px);
       }
     </style>
   </head>
   <body>
-    <a href="../index.html" class="arrow-back">
+    <a href="../index.html" class="arrow">
       <i class="fas fa-arrow-circle-left"></i>
     </a>
-    <p>Loading ...</p>
     <div class="clock">
       <div class="cover"></div>
       <div class="hand hand__minutes"></div>
@@ -120,9 +107,8 @@
       const handSeconds = document.querySelector(".hand__seconds");
       const handMinutes = document.querySelector(".hand__minutes");
       const handHours = document.querySelector(".hand__hours");
-
+      countTime();
       setInterval(countTime, 1000);
-      setTimeout(showClock, 1150);
 
       function countTime() {
         const time = new Date();
@@ -133,10 +119,6 @@
         handSeconds.style.transform = `rotate(${secondsDegree}deg)`;
         handMinutes.style.transform = `rotate(${minutesDegree}deg)`;
         handHours.style.transform = `rotate(${hoursDegree}deg)`;
-      }
-
-      function showClock() {
-        clock.classList.add("is-visible");
       }
     </script>
   </body>
