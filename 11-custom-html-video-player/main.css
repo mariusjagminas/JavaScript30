@@ -98,3 +98,25 @@ input[type="range"] {
 .full-screen {
   flex-basis: 5%;
 }
+
+.arrow {
+  position: fixed;
+  z-index: 5;
+  top: 10px;
+  right: 10px;
+  color: #ffc600 !;
+  font-size: 50px;
+  transition: 0.5s ease-in-out;
+}
+
+.arrow:hover {
+  transform: translateX(-10px) ;
+}
+
+@media (min-width: 700px) {
+  .arrow {
+    top: 20px;
+    right: 30px;
+    font-size: 70px;
+  }
+}

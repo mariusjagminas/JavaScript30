@@ -14,6 +14,9 @@
     <title>Custom HTML Player</title>
   </head>
   <body>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
     <div class="player player__hover">
       <video class="video" src="652333414.mp4"></video>
       <div class="panel">
@@ -22,27 +25,33 @@
         </div>
         <div class="controls">
           <button class="play-button"><i class="fas fa-play"></i></button>
-        <input
-          type="range"
-          name="volume"
-          class="volume"
-          min="0"
-          max="1"
-          step="0.05"
-          value="1"
-        />
-        <input
-          type="range"
-          name="playbackRate"
-          class="speed"
-          min="1"
-          max="15"
-          step="0.05"
-          value="1"
-        />
-        <button  class="skip10s" data-skip="-10"><i class="fas fa-backward"></i>-10s</button>
-        <button  class="skip25s" data-skip="25">25s<i class="fas fa-forward"></i></button>
-        <button class="full-screen"><i class="fas fa-expand"></i></button>
+          <input
+            type="range"
+            name="volume"
+            class="volume"
+            min="0"
+            max="1"
+            step="0.05"
+            value="1"
+          />
+          <input
+            type="range"
+            name="playbackRate"
+            class="speed"
+            min="1"
+            max="15"
+            step="0.05"
+            value="1"
+          />
+          <button class="skip10s" data-skip="-10">
+            <i class="fas fa-backward"></i>
+            -10s
+          </button>
+          <button class="skip25s" data-skip="25">
+            25s
+            <i class="fas fa-forward"></i>
+          </button>
+          <button class="full-screen"><i class="fas fa-expand"></i></button>
         </div>
       </div>
     </div>

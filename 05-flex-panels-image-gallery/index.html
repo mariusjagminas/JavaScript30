@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Image Gallery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous"
     />
-
     <link
-      href="https://fonts.googleapis.com/css?family=Amatic+SC"
-      rel="stylesheet"
-      type="text/css"
+    href="https://fonts.googleapis.com/css?family=Amatic+SC"
+    rel="stylesheet"
+    type="text/css"
     />
+    <title>Image Gallery</title>
     <style>
+
       * {
         box-sizing: border-box;
       }
@@ -48,15 +48,19 @@
       .panel--1 {
         background: url("./img/sunset.jpg") center/cover;
       }
+
       .panel--2 {
         background: url("./img/tree.jpg") center/cover;
       }
+
       .panel--3 {
         background: url("./img/Acropolis.jpg") center/cover;
       }
+
       .panel--4 {
         background: url("./img/stonehedge.jpg") center/cover;
       }
+
       .panel--5 {
         background: url("./img/water.jpg") center/cover;
       }
@@ -84,7 +88,21 @@
         font-size: 30px;
       }
 
-      @media  (min-width: 500px){
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 500px) {
         .panel {
           font-size: 30px;
         }
@@ -93,20 +111,16 @@
           flex: 5;
           font-size: 60px;
         }
-      } 
-
-      .arrow{
-        position: fixed;
-        top: 20px;
-        right: 30px;
-        color: #ffc600;
-        font-size: 70px;
-        transition: 0.5s ease-in-out;
       }
 
-      .arrow:hover {
-        transform: translateX(-10px);
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
       }
+      
     </style>
   </head>
   <body>

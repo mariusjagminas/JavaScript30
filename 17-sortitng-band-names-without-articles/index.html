@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sort Array without Articles</title>
+  </head>
+  <body>
+    <ul class="bands-list"></ul>
+    <script>
+      const bands = [
+        "The Plot in You",
+        "The Devil Wears Prada",
+        "Pierce the Veil",
+        "Norma Jean",
+        "The Bled",
+        "Say Anything",
+        "The Midway State",
+        "We Came as Romans",
+        "Counterparts",
+        "Oh, Sleeper",
+        "A Skylit Drive",
+        "Anywhere But Here",
+        "An Old Dog"
+      ];
+      const sortedBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1));
+      document.querySelector(".bands-list").innerHTML = sortedBands
+        .map(band => `<li>${band}</li>`)
+        .join("");
+
+      function strip(string) {
+        return string.replace(/^(the |an |a )/i, "").trim();
+      }
+    </script>
+  </body>
+</html>
