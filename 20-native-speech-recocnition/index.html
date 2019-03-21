@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Native Speech Recognition</title>
+    <style>
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #177d40;
+      }
+
+      .text {
+        margin: 0 0 3rem;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .fa-microphone {
+       color: red;
+       font-size: 40px;
+       margin: 20px;
+       animation: pulse 1s ease-in-out infinite; 
+      }
+
+      @keyframes pulse {
+        0% {transform: scale(1.0)}
+        50% {transform: scale(1.2)}
+        100% {transform: scale(1.0)}
+      }
+
+      .container--text {
+        background: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+        padding: 1rem 2rem 1rem 5rem;
+        background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+        background-size: 100% 3rem;
+        position: relative;
+        line-height: 3rem;
+      }
+    
+      .container--text:before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        top: 0;
+        left: 30px;
+        bottom: 0;
+        border: 1px solid;
+        border-color: transparent #efe4e4;
+      }
+
+      p {
+        margin: 0 0 3rem;
+      }
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px) ;
+      }
+
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+      }
+  </style>
+    </style>
+  </head>
+  <body>
+      <a href="../index.html" class="arrow"><i class="fas fa-arrow-circle-left"></i></a>
+    <div class="container">
+        <i class="fas fa-microphone "></i>
+      <div class="container--text">
+      </div>
+    </div>
+    <script>
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.interimResults = true;
+      // recognition.lang ="en-us"
+
+      const container = document.querySelector(".container--text");
+
+      recognition.addEventListener("result", showSpeech);
+      recognition.addEventListener("end", startRecognition);
+
+      let p;
+      let isFirstRun = true;
+     
+      function showSpeech(e) {
+        const transcript = e.results[0][0].transcript; 
+        p.textContent = transcript;
+        if(transcript == "delete") {container.innerHTML ="" ; isFirstRun = true};
+       
+      }
+
+      function startRecognition() {
+        recognition.start();
+        p = document.createElement("p");
+        p.classList = "text";
+        p.textContent = isFirstRun ? "Say something.." : null;
+        container.appendChild(p);
+        isFirstRun =false;
+      }
+
+      startRecognition();
+    </script>
+  </body>
+</html>

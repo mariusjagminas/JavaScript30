@@ -86,12 +86,12 @@ i {
 }
 
 input[type="range"] {
-  flex-basis: 33%;
+  width: 33%;
   margin: 0 10px;
 }
 
 [data-skip] {
-  flex-basis: 12%;
+  width: 12%;
   color: white;
 }
 
