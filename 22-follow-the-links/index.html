@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Follow Links</title>
+    <style>
+      body {
+        color: #fff;
+        background: #172d40;
+      }
+
+      nav {
+        width: 600px;
+        margin: 50px auto;
+      }
+
+      a {
+        color: yellow;
+        text-decoration: none;
+        position: relative;
+      }
+
+      .menu {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .wrapper {
+        max-width: 400px;
+        margin: 0 auto;
+        line-height: 2;
+      }
+
+      .span {
+        background: red;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        border-radius: 30px;
+        transition: 0.3s;
+      }
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <nav>
+      <ul class="menu">
+        <li>
+          <a href="">
+            Home
+          </a>
+        </li>
+        <li><a href="">Order Status</a></li>
+        <li><a href="">Tweets</a></li>
+        <li><a href="">Read Our History</a></li>
+        <li><a href="">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <div class="wrapper">
+      <p>
+        Lorem ipsum dolor sit amet,
+        <a href="">consectetur</a>
+        adipisicing elit. Est
+        <a href="">explicabo</a>
+        unde natus necessitatibus esse obcaecati distinctio, aut itaque, qui
+        vitae!
+      </p>
+      <p>
+        Aspernatur sapiente quae sint
+        <a href="">soluta</a>
+        modi, atque praesentium laborum pariatur earum
+        <a href="">quaerat</a>
+        cupiditate consequuntur facilis ullam dignissimos, aperiam quam veniam.
+      </p>
+      <p>
+        Cum ipsam quod, incidunt sit ex
+        <a href="">tempore</a>
+        placeat maxime
+        <a href="">corrupti</a>
+        possimus
+        <a href="">veritatis</a>
+        ipsum fugit recusandae est doloremque? Hic,
+        <a href="">quibusdam</a>
+        , nulla.
+      </p>
+      <p>
+        Esse quibusdam, ad, ducimus cupiditate
+        <a href="">nulla</a>
+        , quae magni odit
+        <a href="">totam</a>
+        ut consequatur eveniet sunt quam provident sapiente dicta neque quod.
+      </p>
+      <p>
+        Aliquam
+        <a href="">dicta</a>
+        sequi culpa fugiat
+        <a href="">consequuntur</a>
+        pariatur optio ad minima, maxime
+        <a href="">odio</a>
+        , distinctio magni impedit tempore enim repellendus
+        <a href="">repudiandae</a>
+        quas!
+      </p>
+    </div>
+    <span class="span"></span>
+    <script>
+      const links = document
+        .querySelectorAll("a[href='']")
+        .forEach(link => link.addEventListener("mouseenter", moveOnLink));
+      const span = document.querySelector(".span");
+
+      function moveOnLink() {
+        const linkCoords = this.getBoundingClientRect();
+        const coords = {
+          x: linkCoords.left + window.scrollX - 5,
+          y: linkCoords.top + window.scrollY,
+          width: linkCoords.width + 10,
+          height: linkCoords.height
+        };
+        span.style.width = `${coords.width}px`;
+        span.style.height = `${coords.height}px`;
+        span.style.transform = `translate(${coords.x}px,${coords.y}px)`;
+      }
+    </script>
+    ;
+  </body>
+</html>
