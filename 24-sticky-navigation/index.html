@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Sticky Navigation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: rgb(226, 218, 218);
+        margin: 0;
+      }
+
+      .header {
+        height: 40vw;
+        background: url("./main-bg.jpg") no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .header__text {
+        color: #ffffff;
+        font-size: 7vw;
+      }
+
+      .navigation {
+        position: absolute;
+        left: 0;
+        bottom: -50px;
+        height: 50px;
+        width: 100%;
+        display: flex;
+      }
+
+      .logo {
+        background: #ffffff;
+        text-transform: uppercase;
+        width: 0;
+        overflow: hidden;
+        transition: width 0.5s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3vw;
+      }
+
+      .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background: #000;
+      }
+
+      .menu__link {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 4vw;
+        text-transform: uppercase;
+        display: block;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 100px auto;
+        background: #ffff;
+        padding: 20px;
+      }
+
+      p {
+        line-height: 1.9;
+      }
+
+      .is-fixed {
+        position: fixed;
+        bottom: initial;
+        top: 0;
+      }
+
+      .is-fixed > .logo {
+        width: 20%;
+      }
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        color: #ffc600;
+        font-size: 40px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+
+        .menu__link,
+        .logo {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <a href="../index.html" class="arrow">
+    <i class="fas fa-arrow-circle-left"></i>
+  </a>
+  <body>
+    <header class="header">
+      <h1 class="header__text">Sticky Navigation Example</h1>
+      <nav class="navigation">
+        <div class="logo">
+          <p class="logo__text">LOGO</p>
+        </div>
+        <ul class="menu">
+          <li class="menu__item"><a href="!#" class="menu__link">home</a></li>
+          <li class="menu__item"><a href="!#" class="menu__link">about</a></li>
+          <li class="menu__item"><a href="!#" class="menu__link">images</a></li>
+          <li class="menu__item">
+            <a href="!#" class="menu__link">location</a>
+          </li>
+          <li class="menu__item"><a href="!#" class="menu__link">maps</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <p class="">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, earum
+        deserunt! Modi voluptatum minus enim. Tempora nisi error facere?
+        Blanditiis libero quia hic debitis architecto. Officia, voluptatibus
+        quidem laboriosam facilis a excepturi officiis temporibus expedita
+        perferendis, dignissimos ratione facere odit ab in iusto! Alias
+        asperiores, cupiditate numqua delectus porro labore! Ex fuga illo
+        dignissimos repellat placeat veritatis error dolor voluptate accusamus
+        praesentium inventore doloremque, in delectus laudantium aliquam culpa
+        molestias nihil. Aut reiciendis porro optio. Explicabo, ab neque
+        temporibus quaerat quisquam sunt et eaque quod quidem culpa unde alias
+        molestiae assumenda. Accusantium vitae nemo quibusdam quis repellat
+        dolorem ratione ipsam consequatur dolore, nam dicta ullam? Laudantium
+        molestiae expedita minus eligendi maxime non distinctio nesciunt
+        excepturi assumenda, laboriosam quia minima dolorem commodi omnis optio
+        possimus odio dolorum, esse repellendus dolore tenetur iste
+        exercitationem sequi quibusdam. Voluptate sint eligendi facere possimus!
+        Necessitatibus ea voluptas accusamus architecto. Est, consectetur!
+        Soluta, dolor.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa fuga ex
+        reprehenderit qui debitis reiciendis commodi ipsum, id voluptatem
+        nesciunt. Nam et eveniet culpa molestiae, autem odit nisi in ipsam unde
+        eos saepe obcaecati eligendi quisquam at harum, soluta recusandae, non
+        officia atque! Error odit perspiciatis maiores ullam debitis officiis
+        odio nesciunt dignissimos facilis eos ipsam labore dicta itaque sapiente
+        tempora obcaecati deserunt vel quis ad delectus praesentium repudiandae,
+        autem veniam. Ad sunt a pariatur voluptatem, officiis ea sit voluptates
+        velit, consequatur quidem, esse rerum illo fuga sapiente voluptas natus
+        culpa? Amet dolorem sint consectetur odio ducimus nostrum maiores.
+        Asperiores?
+      </p>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum incidunt
+        pariatur soluta distinctio, autem eum repellendus quas, sequi eligendi
+        nam recusandae. Iste porro ab, a culpa, minus impedit omnis sunt sint
+        ratione neque, dolore facilis sequi repellendus id explicabo aperiam
+        nostrum hic voluptatibus doloribus debitis numquam molestiae asperiores
+        magni vero. Tenetur quod inventore sint. Qui nobis nisi quam doloribus
+        illo officiis assumenda alias nam asperiores cumque voluptatibus vel
+        eius quia eligendi minima vero distinctio debitis, quod inventore
+        nostrum similique! Sapiente incidunt illo doloremque temporibus libero
+        et corporis cupiditate harum! Sunt accusamus explicabo culpa in nihil
+        ducimus voluptate id at voluptatem.
+      </p>
+    </div>
+    <script>
+      const navbar = document.querySelector(".navigation");
+      const header = document.querySelector(".header");
+      document.addEventListener("scroll", fixNavbar);
+
+      function fixNavbar() {
+        if (window.scrollY > header.offsetHeight) {
+          navbar.classList.add("is-fixed");
+        } else {
+          navbar.classList.remove("is-fixed");
+        }
+      }
+    </script>
+  </body>
+</html>
