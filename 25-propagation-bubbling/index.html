@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Propagation & Bubbling</title>
+  </head>
+  <body>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .outer {
+        background-color: firebrick;
+        width: 100;
+        height: 100%;
+      }
+
+      .middle,
+      .inner {
+        width: 70%;
+        height: 70%;
+      }
+
+      .middle {
+        background: green;
+      }
+
+      .inner {
+        background: grey;
+        color: #ffffff;
+        text-align: center;
+        font-size: 40px;
+      }
+
+    </style>
+    <div class="outer">
+      <div class="middle">
+        <div class="inner">Propagation <br> Event Bubbling</div>
+      </div>
+      <script>
+        const divs = document.querySelectorAll("div");
+        divs.forEach(div => div.addEventListener("click", showText,{capture: false, once: false}));
+
+        function showText(e) {
+           e.stopPropagation();
+          console.log(this.classList.value);
+        }
+      </script>
+    </div>
+  </body>
+</html>
