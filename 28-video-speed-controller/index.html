@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+
+    <title>Video Speed Controller</title>
+  </head>
+  <body>
+    <style>
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #172d40;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .wrapper {
+        display: flex;
+        max-width: 800px;
+        font-size: 10px;
+      }
+
+      .content {
+        display: flex;
+        align-items: center;
+        width: calc(100% - 5.62em);
+      }
+
+      .video {
+        width: 100%;
+        border: 10px solid #efefef;
+      }
+
+      .controller {
+        background: #efefef;
+        margin: 0 1.25em;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .speed {
+        width: 3.12em;
+        background: linear-gradient(170deg, firebrick 0%, rgb(46, 8, 8) 100%);
+        min-height: 40px;
+        max-height: 100%;
+        padding: 1.25em;
+        user-select: none;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 10px 5px;
+        color: #fefefe;
+      }
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 700px) {
+        .wrapper {
+          font-size: 16px;
+        }
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+      }
+    </style>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <div class="wrapper">
+      <div class="content">
+        <video
+          src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+          class="video"
+          controls
+          loop
+        ></video>
+      </div>
+
+      <div class="controller"><div class="speed">0.5x</div></div>
+    </div>
+  </body>
+  <script>
+    const controller = document.querySelector(".controller");
+    const video = document.querySelector(".video");
+    const speed = document.querySelector(".speed");
+    let isDown = false;
+    controller.addEventListener("mousedown", mouseDown);
+    controller.addEventListener("mouseup", mouseLeave);
+    controller.addEventListener("mouseleave", mouseLeave);
+    controller.addEventListener("mousemove", changePlaybackRate);
+
+    function mouseDown() {
+      isDown = true;
+    }
+
+    function mouseLeave() {
+      isDown = false;
+    }
+
+    function  changePlaybackRate(e) {
+      if (!isDown) return;
+      const min = 0.5;
+      const max = 4;
+      const percent = (e.offsetY * 100) / this.offsetHeight;
+      const range = (percent * ((max - min) / 100) + min).toFixed(2);
+      video.playbackRate = range;
+      speed.style.height = `${percent}%`;
+      speed.innerText = `${range}x`;
+    }
+  </script>
+</html>
