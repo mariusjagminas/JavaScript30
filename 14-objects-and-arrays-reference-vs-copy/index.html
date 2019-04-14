@@ -1,83 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Copy vs Reference</title>
-</head>
-<body>
-  <script>
-    // start with strings, numbers and booleans
-    let number = 200;
-    let number2 = number;
-    console.log(number, number2);
-    number = 0;
-    console.log(number, number2);
-    
-    let name ="Marius";
-    let surname = name;
-    console.log(name,surname);
-    name = "John"
-    console.log(name,surname);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Copy vs Reference</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <style>
+      body {
+        background: #172d40;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+      }
 
-    // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+      .wrapper {
+        width: 100%;
+        max-width: 800px;
+        margin: 30px 0;
+        border: 4px solid rgb(211, 211, 5);
+      }
 
-    const players3 = [...players];
-    players3[1] = "--changed--";
-    console.table(players);
-    console.table(players3);
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
 
-    
-    // and we want to make a copy of it.
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
 
-    // You might think we can just do something like this:
+      @media (min-width: 700px) {
+        body {
+          padding: 70px 0;
+        }
 
-    // however what happens when we update that array?
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+      }
+    </style>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <div class="wrapper">
+      <img src="./14-pic-1.png" alt="text photo" />
+    </div>
+    <div class="wrapper">
+      <img src="./14-pic-2.png" alt="text photo" />
+    </div>
+   
+    <script>
+      //  Copying  strings, numbers and booleans
+      let number = 200;
+      let number2 = number;
+      console.log(number, number2);
+      number = 0;
+      console.log(number, number2);
 
-    // now here is the problem!
+      let name = "Alex";
+      let surname = name;
+      console.log(name, surname);
+      name = "John";
+      console.log(name, surname);
 
-    // oh no - we have edited the original array too!
+      // Let's say we have an array
+      // and we want to make a copy of it.
+      const players = ["Wes", "Sarah", "Ryan", "Poppy"];
 
-    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+      // however what happens when we update that array?
+      // now here is the problem!
+      // oh no - we have edited the original array too!
+      // Why? It's because that is an array reference, not an array copy.
+      // They both point to the same array!
+      // So, how do we fix this? We take a copy instead!
+      // one way
+      // or create a new array and concat the old one in
+      // or use the new ES6 Spread
+      // now when we update it, the original one isn't changed
+      const players3 = [...players];
+      players3[1] = "--changed--";
+      console.table(players);
+      console.table(players3);
 
-    // So, how do we fix this? We take a copy instead!
+      // The same thing goes for objects
+      // with Objects
 
-    // one way
+      console.clear();
+      const person = {
+        name: "Wes Bos",
+        age: 80
+      };
 
-    // or create a new array and concat the old one in
+      const newObj = Object.assign({}, person);
+      newObj.person = "--changed--";
 
-    // or use the new ES6 Spread
+      console.log(person);
+      console.log(newObj);
 
-    // now when we update it, the original one isn't changed
+      const newObj3 = { ...person };
+      console.log(newObj3);
 
-    // The same thing goes for objects, let's say we have a person object
-
-    // with Objects
-    console.clear();
-    const person = {
-      name: 'Wes Bos',
-      age: 80
-    };
-
-    const newObj = Object.assign({},person);
-    newObj.person="--changed--";
-
-    console.log(person);
-    console.log(newObj);
-
-    const newObj3 = {...person};
-    console.log(newObj3)
-
-    // and think we make a copy:
-
-    // how do we take a copy instead?
-
-    // We will hopefully soon see the object ...spread
-
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
-
-  </script>
-</body>
+      // Things to note - this is only 1 level deep - both for Arrays and Objects.
+      // lodash has a cloneDeep method, but you should think twice before using it.
+    </script>
+  </body>
 </html>
