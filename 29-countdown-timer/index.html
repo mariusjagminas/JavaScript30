@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>0:00</title>
+  </head>
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: rgb(13, 148, 202);
+        margin: 0;
+        padding: 0;
+        font-family: "Courier New", Courier, monospace;
+        color: white;
+      }
+
+      .wrapper {
+        height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      p {
+        font-size: 5rem;
+        padding: 0;
+        line-height: 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .bar {
+        display: flex;
+        height: 50px;
+        justify-content: space-around;
+        text-align: center;
+        align-items: center;
+      }
+
+      .item {
+        padding: 10px;
+        flex-basis: 18%;
+        cursor: pointer;
+      }
+
+      .minutes {
+        border: 1px solid white;
+        margin: 10px;
+      }
+
+      input {
+        padding: 5px;
+        width: 100%;
+      }
+
+      form {
+        display: none;
+      }
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+
+        form {
+          display: initial;
+        }
+      }
+    </style>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <div class="wrapper">
+      <p class="timer">0:00</p>
+      <h1>
+        <span class="time">Timer</span>
+      </h1>
+    </div>
+
+    <div class="bar">
+      <div class="minutes item" data-minutes="1">1 Min</div>
+      <div class="minutes item" data-minutes="5">5 Min</div>
+      <div class="minutes item" data-minutes="10">10 Min</div>
+      <div class="minutes item" data-minutes="20">20 Min</div>
+      <form action="submit" class="item">
+        <input type="text" class="input" placeholder="enter minutes" />
+      </form>
+    </div>
+
+    <script>
+      const input = document.querySelector(".input");
+      const form = document.querySelector('form[action="submit"]');
+      const timeWindow = document.querySelector(".time");
+      const timerWindow = document.querySelector(".timer");
+      document
+        .querySelectorAll(".minutes")
+        .forEach(item => item.addEventListener("click", startTimerOnClick));
+      let countDownInterval;
+      form.addEventListener("submit", startTimer);
+
+      function startTimerOnClick() {
+        timer(parseInt(this.dataset.minutes));
+      }
+
+      function startTimer(e) {
+        e.preventDefault();
+        const regex = new RegExp(/[^0-9]/, "g");
+        if (input.value.match(regex)) {
+          this.reset();
+          return;
+        }
+        timer(input.value);
+        this.reset();
+      }
+
+      function timer(minutes) {
+        clearInterval(countDownInterval);
+        showReturnTime(minutes);
+        showCountDown(minutes);
+      }
+
+      function showReturnTime(minutes) {
+        const returnTime = new Date(Date.now() + minutes * 60000);
+        const min = returnTime.getMinutes();
+        timeWindow.textContent = `Coming back at: ${returnTime.getHours()}:${
+          min < 10 ? "0" : ""
+        }${min}`;
+      }
+
+      function showCountDown(minutes) {
+        let timeThen = Date.now() + minutes * 60000;
+        countDownInterval = setInterval(countDownTimeLeft, 1000);
+
+        function countDownTimeLeft() {
+          const secondsLeft = Math.round((timeThen - Date.now()) / 1000);
+          if (secondsLeft <= 0) clearInterval(countDownInterval);
+          const minutes = Math.floor(secondsLeft / 60);
+          const seconds = secondsLeft % 60;
+          timerWindow.textContent = `${minutes}:${
+            seconds < 10 ? "0" : ""
+          }${seconds}`;
+        }
+      }
+    </script>
+  </body>
+</html>
