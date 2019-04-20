@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <style>
       body {
         background: rgba(255, 255, 0, 0.657);
@@ -13,7 +14,7 @@
         background: #fff;
         padding: 20px;
         max-width: 600px;
-        margin: 50px auto;
+        margin: 77px auto;
         overflow: hidden;
       }
 
@@ -43,16 +44,41 @@
       }
 
       img {
-        position: relative;
+        position: relative; 
       }
-      
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #000000;
+        font-size: 50px;
+        transition: 0.5s ease-in-out; 
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px) ;
+      }
+
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+        .container {
+          margin: 120px auto;
+        }
+      }
+     
     </style>
     <title>Slide on Scroll</title>
   </head>
   <body>
+     <a href="../index.html" class="arrow"><i class="fas fa-arrow-circle-left"></i></a>
     <div class="container">
       <h1>Slide on Scroll</h1>
-
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores omnis quis corporis, cum dignissimos  corporis sed neque amet, sint iusto odio animi minima natus id nesciunt cum. Dolor aliquam modi laudantium. Odio eius ratione perspiciatis animi quibusdam repellat exercitationem optio, error modi corrupti sed cupiditate at voluptatibus numquam consequuntur, nemo ea necessitatibus eaque quam eos iusto beatae ad assumenda! Illo aperiam labore fuga corrupti ullam pariatur neque porro odio veritatis quo, consectetur cumque omnis aut architecto eos quae iusto ratione beatae provident est dignissimos. Temporibus excepturi, atque sit, nihil consectetur quae dolorum itaque nulla beatae dicta natus ex perferendis aperiam, maiores harum! Inventore optio libero ipsa cum facilis doloribus rerum adipisci? Deleniti, a repudiandae ipsa doloribus fugit sunt voluptates. Eos dolorem natus nisi eius harum pariatur, vel reprehenderit saepe autem aperiam perferendis totam voluptatem quibusdam. Veritatis esse error eum repellat, harum illo, quis officiis doloremque sunt rerum nisi placeat aperiam necessitatibus deleniti nihil ratione nemo nesciunt qui tenetur quibusdam accusamus nam cupiditate. Iusto iste perferendis ipsa. Hic, porro?</p>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero possimus
