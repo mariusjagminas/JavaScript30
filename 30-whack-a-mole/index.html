@@ -32,6 +32,18 @@
         background: rgb(27, 206, 27);
       }
 
+      .hammer {
+        position: absolute;
+        width: 5rem;
+        z-index: 5;
+        border: 1px solid white;
+      }
+
+      .hammer__img {
+        transform: rotateZ(-110deg);
+        transition: 0.04s 
+      }
+
       .wrapper--info {
         width: 100%;
         max-width: 35rem;
@@ -159,6 +171,9 @@
     <a href="../index.html" class="arrow">
       <i class="fas fa-arrow-circle-left"></i>
     </a>
+    <div class="hammer">
+      <img src="hammer.png" class="hammer__img" alt="hammer photo">
+    </div>
     <div class="wrapper--info">
       <p class="score">
         Score:
@@ -199,12 +214,22 @@
       const hiScoreAndTimer = document.querySelector(".hi-score");
       const slapAudio = document.querySelector(".slap");
       const hitAudio = document.querySelector(".hit");
+      const body = document.querySelector("body");
+      const hammer = document.querySelector(".hammer");
+      const hammerImg = document.querySelector(".hammer__img");
+
 
       let moleBefore;
       let score;
       let timeLeft;
 
       startBtn.addEventListener("click", hideStartPanel);
+      body.addEventListener("mousemove", moveHammer);
+
+      function moveHammer(e){
+       
+        hammer.style.cssText =`transform: translate(${e.clientX}px,${e.clientY}px)`;
+      }
 
       function hideStartPanel() {
         startPanel.style.transform = "translateY(-400%)";
@@ -228,12 +253,16 @@
       }
 
       function handleClick(e) {
-        if (e.target.classList.contains("mole")) {
-          addScore(e.target);
-        } else {
-          slapAudio.currentTime = 0;
-          slapAudio.play();
-        }
+        hammerImg.style.cssText = `transform: rotateZ(-180deg)`;
+        setTimeout(()=>{hammerImg.style.cssText = `transform: rotateZ(-120deg)`},200)
+      
+        // if (e.target.classList.contains("mole")) {
+        //   addScore(e.target);
+
+        // } else {
+        //   slapAudio.currentTime = 0;
+        //   slapAudio.play();
+        // }
       }
 
       function playGame(items) {
