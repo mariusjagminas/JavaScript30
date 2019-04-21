@@ -19,7 +19,8 @@ body {
 
 .hammer {
   position: absolute;
-  width: 5rem;
+  width: 4rem;
+  height: 4rem;
   z-index: 5;
   display: none;
 }

@@ -9,8 +9,9 @@ const hitAudio = document.querySelector(".hit");
 const body = document.querySelector("body");
 const hammer = document.querySelector(".hammer");
 const hammerImg = document.querySelector(".hammer__img");
+const arrow = document.querySelector(".arrow");
 
-let randomMole;
+let currentMole;
 let moleBefore;
 let score;
 let timeLeft;
@@ -21,6 +22,7 @@ body.addEventListener("mousemove", moveHammer);
 function hideStartPanel() {
   startPanel.style.transform = "translateY(-400%)";
   body.style.cursor =`none`;
+  arrow.style.display = 'none';
   setTimeout(startGame, 400);
 }
 
@@ -31,7 +33,7 @@ function startGame() {
   score = 0;
   scoreBoard.textContent = "0";
   timer();
-  playGame(moles);
+  playGame();
 }
 
 function timer() {
@@ -47,44 +49,40 @@ function endGame() {
   startPanel.style.transform = "translateY(0)";
   hammer.classList.remove("is-visible");
   body.style.cursor =`pointer`; //  maybe to change later to another pointer
+  arrow.style.display = 'initial';
   setHighestScore();
   showHighestScore();
 }
 
-function playGame(items) {
+function playGame() {
   if (timeLeft <= 0) {
     endGame();
     return;
   }
   const showUpDelay = getRandomNumber(100, 400);
-  randomMole = getRandomMole(items);
-  setTimeout(showHideMole.bind(null, randomMole), showUpDelay);
+  currentMole = getRandomMole();
+  setTimeout(showHideMole, showUpDelay);
 }
 
-function getRandomMole(item) {
-  const moleNumber = getRandomNumber(0, item.length - 1);
-  if (moleNumber === moleBefore) return getRandomMole(item);
+function getRandomMole() {
+  const moleNumber = getRandomNumber(0, moles.length - 1);
+  if (moleNumber === moleBefore) return getRandomMole();
   moleBefore = moleNumber;
-  return item[moleNumber];
+  return moles[moleNumber];
 }
 
-function showHideMole(item) {
+function showHideMole() {
   const showUpTime = getRandomNumber(200, 2000);
-  item.classList.add("is-up");
+  currentMole.classList.add("is-up");
   setTimeout(() => {
-    item.classList.remove("is-up");
+    currentMole.classList.remove("is-up");
     playGame(moles);
   }, showUpTime);
 }
 
-function handleClick(e) {
+function handleClick() {
   animateHammer();
-  // Calculating AABB
-  const moleCoords = randomMole.getBoundingClientRect();
-  const hammerCoords = hammer.getBoundingClientRect();
-  console.log(moleCoords);
-  console.log(hammerCoords);
-  // End of calculating AABB
+  if(isTouching(currentMole,hammer)) handleMoleHit();
 }
 function moveHammer(e) {
   hammer.style.cssText = `transform: translate(${e.clientX -
@@ -104,13 +102,22 @@ function getRandomNumber(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-function addScore(e) {
-  console.log(e);
+// Hammer and Mole collision test
+function isTouching(element1,element2){
+  const {top: topA, bottom: bottomA, left: leftA, right: rightA} = element1.getBoundingClientRect();
+  const {top: topB, bottom: bottomB, left: leftB, right: rightB} = element2.getBoundingClientRect();
+  if(topA > bottomB || bottomA < topB || rightA < leftB || leftA > rightB)  return false;
+  return true
+}
+
+function handleMoleHit() {
   hitAudio.currentTime = 0;
   hitAudio.play();
-  score += 1;
+  score++ ;
   scoreBoard.innerText = score;
-  mole.classList.remove("is-up");
+  currentMole.classList.remove("is-up");
+  body.style.background='red';
+  setTimeout(()=>{body.style.background='rgb(27, 206, 27)'},100)
 }
 
 function getHighestScore() {
