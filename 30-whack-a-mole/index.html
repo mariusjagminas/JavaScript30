@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Whack a Mole</title>
+  </head>
+  <body>
+    <audio preload="auto" src="./slap.mp3" class="slap"></audio>
+    <audio preload="auto" src="hit.mp3" class="hit"></audio>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <div class="hammer">
+      <img src="hammer.png" class="hammer__img" alt="hammer photo" />
+    </div>
+    <div class="wrapper--info">
+      <p class="score">
+        Score:
+        <span class="score__number">0</span>
+      </p>
+      <p class="hi-score">Highest Score: 0</p>
+    </div>
+    <div class="wrapper">
+      <div class="start-panel">
+        <p class="game-over">Whack a Mole</p>
+        <button class="start">Press to Start</button>
+      </div>
+      <div class="hole">
+        <div class="mole 1"></div>
+      </div>
+      <div class="hole">
+        <div class="mole 2"></div>
+      </div>
+      <div class="hole">
+        <div class="mole 3"></div>
+      </div>
+      <div class="hole">
+        <div class="mole 4"></div>
+      </div>
+      <div class="hole">
+        <div class="mole 5"></div>
+      </div>
+      <div class="hole">
+        <div class="mole 6"></div>
+      </div>
+    </div>
+    <script src='main.js'></script>
+  </body>
+</html>

@@ -7,8 +7,73 @@
       Array Cardio Day 1
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
+    <style>
+      body {
+        background: #172d40;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+      }
+
+      .wrapper {
+        width: 100%;
+        max-width: 800px;
+        margin: 30px 0;
+        border: 4px solid rgb(211, 211, 5);
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 700px) {
+        body {
+          padding: 70px 0;
+        }
+
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+      }
+    </style>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <div class="wrapper">
+      <img src="./array-pic-1.png" alt="text photo" />
+    </div>
+    <div class="wrapper">
+      <img src="./array-pic-2.png" alt="text photo" />
+    </div>
+    <div class="wrapper">
+      <img src="./array-pic-3.png" alt="text photo" />
+    </div>
     <script>
       // ## Array Cardio Day 1
 
@@ -51,26 +116,7 @@
         "Berger, Ric",
         "Bergman, Ingmar",
         "Berio, Luciano",
-        "Berle, Milton",
-        "Berlin, Irving",
-        "Berne, Eric",
-        "Bernhard, Sandra",
-        "Berra, Yogi",
-        "Berry, Halle",
-        "Berry, Wendell",
-        "Bethea, Erin",
-        "Bevan, Aneurin",
-        "Bevel, Ken",
-        "Biden, Joseph",
-        "Bierce, Ambrose",
-        "Biko, Steve",
-        "Billings, Josh",
-        "Biondo, Frank",
-        "Birrell, Augustine",
-        "Black, Elk",
-        "Blair, Robert",
-        "Blair, Tony",
-        "Blake, William"
+        "Berle, Milton"
       ];
 
       // Array.prototype.filter()
@@ -115,21 +161,24 @@
       // c. Open dev-tools
       // d. Open console.
       // e. Copy & paste that code below into the Console, then press Enter;
-    
-      const links = Array.from(document.querySelectorAll(".mw-category-group a"));
-      const bulvarsNames = links.map(link => link.innerText).filter(bulvar => bulvar.includes("de"));
+
+      const links = Array.from(
+        document.querySelectorAll(".mw-category-group a")
+      );
+      const bulvarsNames = links
+        .map(link => link.innerText)
+        .filter(bulvar => bulvar.includes("de"));
       console.table(bulvarsNames);
 
-  
       // 7. sort Exercise
       // Sort the people alphabetically by last name
-     const peopleOrdered= people.sort((a,b)=> {
+      const peopleOrdered = people.sort((a, b) => {
         aLastName = a.split(", ")[1];
         bLastName = b.split(", ")[1];
         return aLastName > bLastName ? 1 : -1;
       });
       console.table(peopleOrdered);
-   
+
       // 8. Reduce Exercise
       // Sum up the instances of each of these
       const data = [
@@ -149,13 +198,13 @@
         "truck"
       ];
 
-      const Counted = data.reduce((total,item) =>{
+      const Counted = data.reduce((total, item) => {
         if (!total[item]) {
-        total[item] = 0;
-      }
-      total[item]++;
-      return total;
-      },{});
+          total[item] = 0;
+        }
+        total[item]++;
+        return total;
+      }, {});
       console.table(Counted);
     </script>
   </body>
