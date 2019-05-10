@@ -4,10 +4,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
     <title>Sort Array without Articles</title>
   </head>
   <body>
-    <ul class="bands-list"></ul>
+    <style>
+      body {
+        background-color: #172d40;
+        color: #ffffff;
+      }
+
+      h1 {
+        padding-top: 40px;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      .wrapper {
+        max-width: 250px;
+        margin: 30px auto;
+        border: 1px solid #ffffff;
+      }
+
+      .arrow {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        color: #ffc600;
+        font-size: 50px;
+        transition: 0.5s ease-in-out;
+      }
+
+      .arrow:hover {
+        transform: translateX(-10px);
+      }
+
+      @media (min-width: 700px) {
+        .arrow {
+          top: 20px;
+          right: 30px;
+          font-size: 70px;
+        }
+      }
+    </style>
+    <a href="../index.html" class="arrow">
+      <i class="fas fa-arrow-circle-left"></i>
+    </a>
+    <h1>Sort Array without Articles</h1>
+    <div class="wrapper">
+      <h2>Input</h2>
+      <ul class="input"></ul>
+    </div>
+    <div class="wrapper">
+      <h2>Output</h2>
+      <ul class="bands-list"></ul>
+    </div>
+
     <script>
       const bands = [
         "The Plot in You",
@@ -24,6 +85,11 @@
         "Anywhere But Here",
         "An Old Dog"
       ];
+
+      document.querySelector(".input").innerHTML = bands
+        .map(band => `<li>${band}</li>`)
+        .join("");
+
       const sortedBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1));
       document.querySelector(".bands-list").innerHTML = sortedBands
         .map(band => `<li>${band}</li>`)
