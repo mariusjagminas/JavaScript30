@@ -56,6 +56,7 @@
 
       .card {
         display: block;
+        position: relative;
         text-align: initial;
         font-size: 1rem;
         font-weight: 500;
@@ -70,10 +71,6 @@
         transition: 0.3s ease-in;
       }
 
-      .card:hover {
-        transform: scale(1.06);
-      }
-
       .card__img {
         display: block;
         width: 100%;
@@ -84,6 +81,27 @@
         color: black;
         font-size: 1rem;
         margin: 7px 2px;
+      }
+
+      .not-available {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(255, 2555, 255, 0.8);
+        color: red;
+        font-size: 40px;
+        font-weight: bold;
+        z-index: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .not-available__text {
+        width: 90%;
+        text-align: center;
       }
 
       @media screen and (min-width: 650px) {
@@ -105,17 +123,13 @@
         .card {
           flex-basis: 22%;
         }
-      }
 
-      @media screen and (max-width: 1290px) {
-        .hide-on-tablet {
-          display: none !important;
+        .card:hover {
+          transform: scale(1.06);
         }
-      }
 
-      @media screen and (max-width: 650px) {
-        .hide-on-mobile {
-          display: none !important;
+        .not-available {
+          font-size: 30px;
         }
       }
     </style>
@@ -192,7 +206,7 @@
         <p class="card__text">#7 Array Cardio 2</p>
       </a>
       <!-- Card -->
-      <a href="08-html5-canvas/index.html" class="card">
+      <a href="08-html5-canvas/index.html" class="card  touchscreen">
         <img
           src="assets/08-canvas.jpg"
           alt="Colorfulls ribbons photo"
@@ -259,7 +273,10 @@
         <p class="card__text">#15 Local Storage</p>
       </a>
       <!-- Card -->
-      <a href="16-css-text-shadow-effect-mouse-move/index.html" class="card">
+      <a
+        href="16-css-text-shadow-effect-mouse-move/index.html"
+        class="card  touchscreen"
+      >
         <img
           src="assets/16-shadows.jpg"
           alt="Text in the middle screen"
@@ -379,5 +396,6 @@
         <p class="card__text">#30 Whack a Mole</p>
       </a>
     </div>
+    <script src="./touchscreens.js"></script>
   </body>
 </html>
