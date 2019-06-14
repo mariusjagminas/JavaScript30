@@ -5,6 +5,9 @@
 body {
   background: #172d40;
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .navigation__list,
@@ -15,7 +18,7 @@ body {
 }
 
 .navigation {
-  margin-top: 60px;
+  margin-top: 70px;
   position: relative;
 }
 
@@ -51,8 +54,8 @@ body {
 
 .navigation__item {
   position: relative;
-  padding: 20px;
-   display: flex; 
+  padding: 5px;
+  display: flex; 
   justify-content: center; 
 
 }
@@ -61,7 +64,7 @@ body {
 .navigation__link {
   color: #ffffff;
   background: #487399;
-  padding: 10px 20px;
+  padding: 8px 10px;
   font-size: 24px;
 }
 
